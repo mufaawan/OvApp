@@ -10,44 +10,52 @@ import styles from './Styles/AppLanderScreenStyle';
 
 
 class AppLanderScreen extends Component {
+
   
   render () {
+    const {navigate} = this.props.navigation;
     const windowSize = Dimensions.get('window');
-    const { navigate } = this.props.navigation;
     return (
-      <View style={styles.CarouselParentContainer}>
-        <View style={styles.CarouselContainer}>
+
+      <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <View style={styles.container}>
 
 
           <Carousel
 
-            style={styles.CarouselStyle}
+            style={{  zIndex: 0, position: 'absolute' }}
+            width={windowSize.width}
+            height={windowSize.height}
             delay={2000}
             onScroll={() => console.log('on scroll view')}
             onScrollBegin={() => console.log('scroll begin')}
             onPageChange={(page) => console.log('scroll change', page)}>
 
-            <View style={styles.CarouselContentContainer}>
+            <View style={styles.contentContainer}>
 
-              <Text style={styles.CarouselParentText}> Onboarding 1 Heading </Text>
+              <Text style={{ flex: 1, color: 'white', zIndex: 1, position: 'absolute', fontSize: 30 }}> Onboarding 1 Heading </Text>
               <Image
-                style={styles.CarouselImage }
+                style={{ width: windowSize.width, height: windowSize.height, zIndex: 0, position: 'absolute' }}
                 source={require('../AppResources/carousel/onboarding-1.png')}
               />
             </View>
-            <View style={styles.CarouselContentContainer}>
+            <View style={styles.contentContainer}>
 
-              <Text style={styles.CarouselParentText}> Onboarding 2 Heading </Text>
+              <Text style={{ color: 'white', zIndex: 1, position: 'absolute', fontSize: 30 }}> Onboarding 2 Heading </Text>
               <Image
-                style={styles.CarouselImage}
+                style={{ width: windowSize.width, height: windowSize.height, zIndex: 0, position: 'absolute' }}
                 source={require('../AppResources/carousel/onboarding-2.png')}
               />
             </View>
-            <View style={styles.CarouselContentContainer}>
+            <View style={styles.contentContainer}>
 
-              <Text style={styles.CarouselParentText}> Onboarding 3 Heading </Text>
+              <Text style={{ color: 'white', zIndex: 1, position: 'absolute', fontSize: 30 }}> Onboarding 3 Heading </Text>
               <Image
-                style={styles.CarouselImage}
+                style={{ width: windowSize.width, height: windowSize.height, zIndex: 0, position: 'absolute' }}
                 source={require('../AppResources/carousel/onboarding-3.png')}
               />
             </View>
@@ -79,7 +87,7 @@ class AppLanderScreen extends Component {
                 borderColor: '#0084ff',
                 
               }}
-              onPress={() =>  this.props.navigation.navigate('HomeScreen')}
+              onPress={() =>  navigate('MenuScreen')}
               underlayColor='#fff'>
               <Text
                 style={{
@@ -141,7 +149,7 @@ class AppLanderScreen extends Component {
           
         </View>
       </View >
-    )
+    );
   }
 }
 
