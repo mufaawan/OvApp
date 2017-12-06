@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native'
-import { ApplicationStyles } from '../../Themes/'
+import { StyleSheet, Dimensions } from 'react-native';
+import { ApplicationStyles } from '../../Themes/';
+
+const { screeWidth } = Dimensions.get('window');
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -9,14 +11,16 @@ export default StyleSheet.create({
     backgroundColor: '#0084ff'
 },
 MenuItemContainer: {
-    flexDirection:'row',
+    flexDirection: 'row',
     alignItems: 'flex-start',
-    justifyContent : 'flex-start'
-
+    justifyContent: 'flex-start'
 
 },
 content: {
-    zIndex: 1
+    zIndex: 1,
+    width: screeWidth,
+    backgroundColor: 'white',
+    flex: 1,
 },
 footerContainer: {
    flexDirection: 'row',
@@ -46,9 +50,17 @@ textBy: {
     fontSize: 12
 },
 
-menuClickable:{
+menuClickable: {
   flex: 0.8
 },
+Menu: {
+    position: 'absolute',
+    width: 150,
+    left: 0,
+    top: 100,
+    backgroundColor: 'transparent'
+},
+
 textMenu: {
     fontSize: 20,
     color: '#fff',
@@ -59,13 +71,7 @@ MenuIcon: {
 flex: 0.2,
 
 },
-MenuLogo:{
+MenuLogo: {
    width: 141, height: 49, marginBottom: 20
   }
-
-
-
-
-
-
-})
+});

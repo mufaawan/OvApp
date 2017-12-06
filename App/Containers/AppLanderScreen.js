@@ -9,25 +9,30 @@ import { connect } from 'react-redux';
 import styles from './Styles/AppLanderScreenStyle';
 
 
+//This is Onboarding Screen
+
 class AppLanderScreen extends Component {
 
-  
-  render () {
-    const {navigate} = this.props.navigation;
-    const windowSize = Dimensions.get('window');
+
+  render() {
+    //Delegate will be used to navigate between screens
+    const { navigate } = this.props.navigation;
+    //holds the current device screen size
+    const windowSize = Dimensions.get('window'); 
     return (
 
-      <View style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+      //Parent  Container for Whole Screnn
+      <View style={styles.ParentContainer}>
+
+        {/* Carousel Container: 
+        There are multiple views on single screen with different ZIndices pleae view layout Image*/}
         <View style={styles.container}>
 
 
+          {/* Carousel Slies Container: Each added view is added as a carousel slide */}
           <Carousel
 
-            style={{  zIndex: 0, position: 'absolute' }}
+            style={styles.CarouselStyle}
             width={windowSize.width}
             height={windowSize.height}
             delay={2000}
@@ -35,38 +40,41 @@ class AppLanderScreen extends Component {
             onScrollBegin={() => console.log('scroll begin')}
             onPageChange={(page) => console.log('scroll change', page)}>
 
+            {/* Onboardiing 1 Slide*/}
             <View style={styles.contentContainer}>
 
-              <Text style={{ flex: 1, color: 'white', zIndex: 1, position: 'absolute', fontSize: 30 }}> Onboarding 1 Heading </Text>
+              <Text style={styles.CarouselText}> Onboarding 1 Heading </Text>
               <Image
-                style={{ width: windowSize.width, height: windowSize.height, zIndex: 0, position: 'absolute' }}
+                style={styles.CarouselImage}
                 source={require('../AppResources/carousel/onboarding-1.png')}
               />
             </View>
+            {/* Onboardiing 2 Slide*/}
             <View style={styles.contentContainer}>
 
-              <Text style={{ color: 'white', zIndex: 1, position: 'absolute', fontSize: 30 }}> Onboarding 2 Heading </Text>
+              <Text style={styles.CarouselText}> Onboarding 2 Heading </Text>
               <Image
-                style={{ width: windowSize.width, height: windowSize.height, zIndex: 0, position: 'absolute' }}
+                style={styles.CarouselImage}
                 source={require('../AppResources/carousel/onboarding-2.png')}
               />
             </View>
+            {/* Onboardiing 3 Slide*/}
             <View style={styles.contentContainer}>
 
-              <Text style={{ color: 'white', zIndex: 1, position: 'absolute', fontSize: 30 }}> Onboarding 3 Heading </Text>
+              <Text style={styles.CarouselText}> Onboarding 3 Heading </Text>
               <Image
-                style={{ width: windowSize.width, height: windowSize.height, zIndex: 0, position: 'absolute' }}
+                style={styles.CarouselImage}
                 source={require('../AppResources/carousel/onboarding-3.png')}
               />
             </View>
           </Carousel>
-          <View style={{ width: 400, height:500, zIndex: 1, position: 'absolute', flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
-          
-          { /* OnBoardingLog */ }
-          <View style={{flex: 15, flexDirection: 'row', justifyContent: 'center', alignItems:'center' }} >  
+          <View style={styles.SpaceBW}>
 
-          <Image
-                style={{position:'absolute', width: 161, height: 36}}
+            { /* OnBoardingLogo */}
+            <View style={styles.OnboardinLogoContainer} >
+
+              <Image
+                style={styles.OnboardingLogo}
                 source={require('../AppResources/carousel/onboarding-logo.png')}
               />
 
@@ -75,84 +83,57 @@ class AppLanderScreen extends Component {
             {/**
              to Write text: Replacment of text in image
              */}
-          <View style={{ flex: 15, flexDirection: 'row', justifyContent: 'center', alignContent: 'space-around' }} >
+            <View style={styles.OnboardingTextsContainer} />
+            
+
+            {/* Register and Login Buttons Container */}
+            <View style={styles.ButtonsContainer} >
+              {/* Login Button- Primary Button */}
+              <TouchableOpacity
+                style={styles.ButtonPrimary}
+                onPress={() => navigate('LoginScreen')}
+                underlayColor='#fff'
+              >
+                <Text
+                  style={styles.ButtonPrimaryText}
+                >Login</Text>
+              </TouchableOpacity>
+
+              {/* Register Button- Secondary Button */}
+              <TouchableOpacity
+                style={styles.ButtonSecondary}
+                onPress={() => navigate('RegisterScreen')}
+                underlayColor='#fff'
+              >
+                <Text
+                  style={styles.ButtonSecondaryText}
+                >Register</Text>
+              </TouchableOpacity>
+
             </View>
-            <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'space-around'}} >
+
+            {/* Skip Button to move on Menu Screen */}
             <TouchableOpacity
-              style={{
-                backgroundColor: '#0084ff',
-                justifyContent:'center',
-                borderRadius: 6,
-                borderWidth: 3,
-                borderColor: '#0084ff',
-                
-              }}
-              onPress={() =>  navigate('MenuScreen')}
-              underlayColor='#fff'>
-              <Text
-                style={{
-                  color: '#fff',
-                  textAlign: 'center',
-                  paddingLeft: 40,
-                  paddingRight: 40,
-                  fontSize: 18,
-                  fontWeight:'bold'
-                  
-
-                }}>Login</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'transparent',
-                justifyContent:'center',
-                borderRadius: 6,
-                borderWidth: 3,
-                borderColor: '#0084ff',
-                
-              }}
-              onPress={() => navigate('HomeScreen')}
-              underlayColor='#fff'>
-              <Text
-                style={{
-                  color: '#fff',
-                  textAlign: 'center',
-                  paddingLeft: 25,
-                  paddingRight: 25,
-                  fontSize: 18,
-                  fontWeight:'bold'
-                  
-
-                }}>Register</Text>
-            </TouchableOpacity>
-
-            </View>    
-            <TouchableOpacity
-              style={{
-                justifyContent: 'flex-end',
-                flex:2,
-                }}
+              style={styles.SkipButton}
               onPress={() => navigate('MenuScreen')}
-              underlayColor='#fff'>
+              underlayColor='#fff'
+            >
               <Text
-                style={{
-                  textAlign:'center',
-                  color: '#fff', 
-                  fontSize:12, 
-                  fontWeight:'bold'
-
-                }}>Skip & Start Shoping</Text>
+                style={styles.SkipButtonText}
+              >Skip & Start Shoping</Text>
             </TouchableOpacity>
 
           </View>
-          
-          
+
+
         </View>
       </View >
     );
   }
 }
 
+
+// Not used yet- May be used in future as per navigation requirments
 const mapStateToProps = (state) => {
   return {
   }
