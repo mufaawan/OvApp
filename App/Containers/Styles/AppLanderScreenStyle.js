@@ -48,6 +48,4 @@ CarouselImage:
    zIndex: 0, 
    position: 'absolute' },
 
- 
-
-})
+ })
